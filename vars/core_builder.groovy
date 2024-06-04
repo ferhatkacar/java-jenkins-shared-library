@@ -1,7 +1,7 @@
 def call(Map config) {
 
     def triggerRef = config.containsKey('trigger_ref') ? config.trigger_ref : '$.push.changes[0].old.name'
-    def triggerRegexpFilter = config.containsKey('trigger_regexp_filter') ? config.trigger_regexp_filter : '^(development|uat)'
+    def triggerRegexpFilter = config.containsKey('trigger_regexp_filter') ? config.trigger_regexp_filter : '^(refs/heads/)?(development|develop|dev|test|demo|main)$'
 
     if ( config.containsKey("github_hook") && config.github_hook ) {
         properties([pipelineTriggers([githubPush()])])
